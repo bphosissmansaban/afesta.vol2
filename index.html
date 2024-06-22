@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Formulir Input Data</h1>
-        <form action="process.php" method="post">
+        <form id="dataForm">
             <label for="name">Nama:</label>
             <input type="text" id="name" name="name" required>
             
@@ -18,7 +18,36 @@
             
             <button type="submit">Submit</button>
         </form>
+        <div id="responseMessage"></div>
     </div>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById('name').value;
+            let address = document.getElementById('address').value;
+            let responseMessage = document.getElementById('responseMessage');
+
+            fetch('http://localhost/api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name: name, address: address})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    responseMessage.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                } else {
+                    responseMessage.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                }
+            })
+            .catch(error => {
+                responseMessage.innerHTML = `<p style="color: red;">Terjadi kesalahan: ${error.message}</p>`;
+            });
+        });
+    </script>
 </body>
 </html>
-
