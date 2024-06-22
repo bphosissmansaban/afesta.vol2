@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Data Nama dan Alamat</title>
+    <title>Aesmoc server</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
             let address = document.getElementById('address').value;
             let responseMessage = document.getElementById('responseMessage');
 
-            fetch('http://localhost/api.php', {
+            fetch('https://e89b-140-213-38-108.ngrok-free.app/index.html', {  // ganti dengan URL Ngrok Anda
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
